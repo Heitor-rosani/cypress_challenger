@@ -14,3 +14,5 @@ How to run the project:
   - Select the test than you want to run
 
 - CI
+
+  - Every new push, already run the pipeline with test, just check in in Actions menu
