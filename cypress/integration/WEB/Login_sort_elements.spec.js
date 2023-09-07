@@ -4,17 +4,25 @@ describe('Analising the site', () => {
   beforeEach(()=>{
     cy.login()
   })
-  it.only('Sorting A-Z', ()=>{
+  it('Sorting A-Z', ()=>{
+    let sort_a_z_list = Cypress.env('list_elements').sort()
     cy.get('[data-test="product_sort_container"]').select('Name (A to Z)')
-    let item_list = [] 
-    cy.create_list('.inventory_item_name', item_list)
-    cy.log(item_list[0])
+    let number_itens = Cypress.$('.inventory_item_name').length
+    for (let index = 0; index < number_itens; index++) {
+      cy.get('.inventory_item_name').eq(index).then((value) => {
+        expect(value.text()).to.eql(sort_a_z_list[index])
+       }) 
+    }
  })
 
  it('Sorting Z-A', () => {
+  let sort_z_a_list = Cypress.env('list_elements').reverse()
   cy.get('[data-test="product_sort_container"]').select('Name (Z to A)')
-  let item_list = [] 
-  cy.create_list('.inventory_item_name', item_list)
-  cy.log(item_list)
+  let number_itens = Cypress.$('.inventory_item_name').length
+  for (let index = 0; index < number_itens; index++) {
+    cy.get('.inventory_item_name').eq(index).then((value) => {
+      expect(value.text()).to.eql(sort_z_a_list[index])
+     }) 
+  }
  })
 })

@@ -7,11 +7,3 @@ Cypress.Commands.add('login', () => {
   cy.get('[data-test="password"]').type(Cypress.env('passwordWeb'))
   cy.get('[data-test="login-button"]').click()
 })
-
-Cypress.Commands.add('create_list', (selector, list) => {
-  cy.get(selector)
-  .each(($el) => {
-    list.push($el.text()) 
-    cy.log($el.text())
-  })
-})
